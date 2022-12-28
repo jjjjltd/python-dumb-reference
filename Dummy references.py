@@ -1,4 +1,4 @@
-def printdict():
+def dictprint():
 
     # Populate and print a dictionary
 
@@ -32,6 +32,34 @@ def dictproc():
 
             print(f"The highest bidder is: {name} who bid:  {highest}")
 
+def listproc():
+    print("Create and print a list.\n")
+    list = ["mango", "strawberry", "orange", "apple", "banana"]
+    print(list)
 
-# printdict()
-dictproc()
+    list.append("labradoodle")
+    list[1] = "peach"
+
+    for item in list:
+        # processing a bit more usefully
+        print(f"item name: {item} at position: {list.index(item)} \n (which is {list.index(item)+1} without the silly array offset).")
+
+    print(f"... and this is where you find orange:  {list.index('orange')} (with the silly offset)")
+
+def tupleexample():
+    thistuple = ("apple", "banana", "cherry", "apple", "cherry")
+    print(thistuple)
+
+    print(f"My tuple size is: {len(thistuple)}.  Type:  {type(thistuple)}.")
+
+
+def classdefinition():
+    from quiz_brain import QuizBrain
+    qb = QuizBrain()
+    qb.classyresponse()
+
+# dictprint()
+# dictproc()
+# listproc()
+# tupleexample()
+classdefinition()
