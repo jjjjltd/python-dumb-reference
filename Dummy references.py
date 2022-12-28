@@ -58,8 +58,13 @@ def classdefinition():
     qb = QuizBrain()
     qb.classyresponse()
 
+def all_args(a, *args, **kw):
+    print("Example of how arguments are processed, *args and **kw:") 
+    print(a, args, kw)
+
 # dictprint()
 # dictproc()
 # listproc()
 # tupleexample()
-classdefinition()
+# classdefinition()
+all_args(4, 7, 3, 0, x=10, y=64)
