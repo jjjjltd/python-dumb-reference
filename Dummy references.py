@@ -5,7 +5,8 @@ def dictprint():
     thisdict = {
     "brand": "Ford",
     "model": "Mustang",
-    "year": 1964
+    "year": 1964,
+    "Eleanor": "Profoundly annoying."
     }
     print(thisdict)
 
@@ -62,9 +63,17 @@ def all_args(a, *args, **kw):
     print("Example of how arguments are processed, *args and **kw:") 
     print(a, args, kw)
 
+def printsubstitutionvariables():
+    name = "John"
+    age = 57
+
+    print("My name is {one}, my age is {two}".format(one=name, two=age))
+
 # dictprint()
 # dictproc()
 # listproc()
 # tupleexample()
 # classdefinition()
-all_args(4, 7, 3, 0, x=10, y=64)
+# all_args(4, 7, 3, 0, x=10, y=64)
+printsubstitutionvariables()
+
