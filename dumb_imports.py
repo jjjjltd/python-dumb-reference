@@ -1,3 +1,6 @@
+def explainwhatyouaredoing():
+    print("This stuff gets imported and run in Dummy References.py")
+
 def dictprint():
 
     # Populate and print a dictionary
@@ -68,3 +71,4 @@ def printsubstitutionvariables():
     age = 57
 
     print("My name is {one}, my age is {two}".format(one=name, two=age))
+
