@@ -1,9 +1,9 @@
 def explainwhatyouaredoing():
+    """ This stuff gets imported and run in Dummy References.py """
     print("This stuff gets imported and run in Dummy References.py")
 
 def dictprint():
-
-    # Populate and print a dictionary
+    """ Populate and print a dictionary """
 
     thisdict = {
     "brand": "Ford",
@@ -14,7 +14,7 @@ def dictprint():
     print(thisdict)
 
 def dictproc():
-    # Populate a dictionary based on input and process through
+    """ Populate a dictionary based on input and process through """
     bidders = {}
     count = 0
     next = True
@@ -63,6 +63,7 @@ def classdefinition():
     qb.classyresponse()
 
 def all_args(a, *args, **kw):
+    """ Sample invocation: f.all_args(4, 7, 3, 0, x=10, y=64) """
     print("Example of how arguments are processed, *args and **kw:") 
     print(a, args, kw)
 
