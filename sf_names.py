@@ -1,4 +1,5 @@
 import os
+import pprint
 # Create a list of Sci Fi "Character" names based on the probability of letters appearing in places (first, second...) in words.
 
 # Note:  Starting with a Words List as a constant.  Ultimately, we will want to be able to:
@@ -57,27 +58,38 @@ def init_letters_dict(letters_string):
         # Initialise start value
         letters_dict[letter] = init_val
 
+def clear_posd(posd):
+    for i in range(1, len(posd)):
+        posinst = f"{pos_string(i)}"
+        posd[posinst] = 0
+
 def pos_count(word_len, word_list):
     """  Initialise dictionary of how often letter appears in each word."""
     init_val = 0
 
-    for k, v in  word_len.items():
-        for word in word_list:
-            i = 0
+    # for k, v in  word_len.items():
+    #     for word in word_list:
+    #         i = 0
+    #         for letter in word:
+    #             i += 1
+    #             if letter.lower() == k:
+    #                 posinst = f"{pos_string(i)}"
+    #                 posd[posinst] += 1
+
+    for k in word_len.keys():
+        posd = init_pos_count(word_len)
+        for word in word_list:    
+            pos = 0
             for letter in word:
-                i += 1
+                pos += 1
                 if letter.lower() == k:
-                    posinst = f"{pos_string(i)}"
+                    posinst = f"{pos_string(pos)}"
                     posd[posinst] += 1
-                    
-
-            letters_dict[f"{k}positions"] = {k: posd}
-        print(letters_dict[f"{k}positions"])
-            
-        for v in posd.values():
-            v = 0
 
 
+        letters_dict[f"{k}positions"] = {k: posd}
+
+    print(letters_dict[f"{k}positions"])
     return letters_dict
 
 def letter_count(words_list):
@@ -140,6 +152,10 @@ word_len = init_word_len(word_len)
 max_word_len, total_letters = max_word_length(words_list)
 init_letters_dict(letters_string)
 letter_count(words_list)
-posd = init_pos_count(word_len)
+
 
 letters_dict = pos_count(word_len, words_list)
+
+os.system('cls')
+pp = pprint.PrettyPrinter(indent=4)
+pp.pprint(letters_dict)
