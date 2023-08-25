@@ -1,5 +1,6 @@
 import os
 import pprint
+import pandas as pd
 # Create a list of Sci Fi "Character" names based on the probability of letters appearing in places (first, second...) in words.
 
 # Note:  Starting with a Words List as a constant.  Ultimately, we will want to be able to:
@@ -26,6 +27,7 @@ class Letter_Stat():
     
     word_count = 0
     longest_word = 0
+    total_letters = 0
 
     def __init__(self, letter, letter_count=0, letter_pos={}) :
         self.letter = letter,
@@ -72,16 +74,17 @@ def pos_count(word_len, word_list):
         for word in word_list:    
             pos = 0
             for letter in word:
-                if letter in letters_string:
+                if letter.lower() in letters_string:
                     pos += 1
                     if letter.lower() == k:
                         posinst = f"{pos_string(pos)}"
                         posd[posinst] += 1
 
-
+        
         # letters_dict[f"{k}positions"] = {k: posd}
         letters_dict[f"{k}positions"] = posd
-
+        # letters_dict[f"{k}positions"][f"{k}"] = 27
+    print(posd)
     return letters_dict
 
 def letter_count(words_list):
@@ -138,7 +141,7 @@ def init_pos_count(word_len):
 def dict_tidy(letters_dict, word_len):
 
     # Tidy up position records with zero values.
-    for i in range(1, len(word_len.keys())):
+    for i in range(1, len(word_len.keys())+1):
         posinst = pos_string(i)
         for k in word_len.keys():
             if letters_dict[f"{k}positions"][posinst] == 0:
@@ -154,6 +157,8 @@ def dict_tidy(letters_dict, word_len):
 def build_stats(letters_dict):
     Letter_Stat.word_count = word_count
     Letter_Stat.longest_word = max_word_len
+    Letter_Stat.total_letters = total_letters
+
     all_stats = {k: Letter_Stat(k, v, letters_dict[f"{k}positions"]) for k, v in letters_dict.items() if len(k) == 1}
 
     return all_stats
@@ -162,8 +167,18 @@ def print_stats(all_stats):
     print(f"Word sample: {words_sample}\n\n")
     for k, v in letters_dict.items():
         if len(k) == 1:
-            print(f"For {k}: Number of letters in string {all_stats[k].letter_count} in positions {all_stats[k].letter_pos}")
+            pct_letters = (v/Letter_Stat.total_letters) * 100
+            print(f"For {k}:  {v} letters in string ({pct_letters:.2f}%). In positions {all_stats[k].letter_pos}")
 
+def print_stats_per_letter(all_stats):
+    print("Letter Stats")
+    for k in letters_dict.keys():
+        if len(k) == 1:
+            print(f"{k}:  {all_stats[k].letter_pos}")
+
+def save_to_df():
+    df = pd.DataFrame(letters_dict)
+    df.to_csv("sf_dataframe.csv")
 
 words_sample = get_words()
 
@@ -178,7 +193,7 @@ letter_count(words_list)
 
 letters_dict = pos_count(word_len, words_list)
 
-os.system('cls')
+# os.system('cls')
 pp = pprint.PrettyPrinter(indent=4)
 
 letters_dict = dict_tidy(letters_dict, word_len)
@@ -186,3 +201,5 @@ letters_dict = dict_tidy(letters_dict, word_len)
 all_stats = build_stats(letters_dict)
 print_stats(all_stats)
 print(Letter_Stat.word_count)
+save_to_df()
+print_stats_per_letter(all_stats)
