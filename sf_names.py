@@ -9,7 +9,7 @@ import pandas as pd
 
 
 # Default word sample.
-WORDS_SAMPLE = "The quick brown fox jumps over the lazy dog"
+WORDS_SAMPLE = "The quick brown fox jumps over the lazy dog z"  # Note: single character at the end aids testing.
 # Initialisation values for number of words in sample_words
 word_count = 0
 # String of words separated into list
@@ -28,11 +28,12 @@ class Letter_Stat():
     word_count = 0
     longest_word = 0
     total_letters = 0
+    positions = {}
 
     def __init__(self, letter, letter_count=0, letter_pos={}) :
-        self.letter = letter,
-        self.letter_count = letter_count,
-        self.letter_pos = letter_pos,
+        self.letter = letter
+        self.letter_count = letter_count
+        self.letter_pos = letter_pos
 
 
 longest_word_x = 0
@@ -81,10 +82,8 @@ def pos_count(word_len, word_list):
                         posd[posinst] += 1
 
         
-        # letters_dict[f"{k}positions"] = {k: posd}
         letters_dict[f"{k}positions"] = posd
-        # letters_dict[f"{k}positions"][f"{k}"] = 27
-    print(posd)
+
     return letters_dict
 
 def letter_count(words_list):
@@ -164,21 +163,63 @@ def build_stats(letters_dict):
     return all_stats
 
 def print_stats(all_stats):
+    probability = {}
     print(f"Word sample: {words_sample}\n\n")
     for k, v in letters_dict.items():
         if len(k) == 1:
             pct_letters = (v/Letter_Stat.total_letters) * 100
             print(f"For {k}:  {v} letters in string ({pct_letters:.2f}%). In positions {all_stats[k].letter_pos}")
 
-def print_stats_per_letter(all_stats):
+        for i in range(1, Letter_Stat.longest_word+1):
+            posinst = pos_string(i)
+            try:
+                posltr = all_stats[k].letter_pos[posinst]
+            except KeyError:
+                posltr = 0
+
+            if posltr > 0:
+                pospct = (posltr/Letter_Stat.positions[f"{i}"]) * 100
+            else:
+                pospct = 0
+            
+            if pospct > 0:
+                print(f"Probability of {k} in position {i} = {pospct:.2f}%")
+            
+
+def get_stats_per_letter(all_stats):
+    positions = {}
+
+     # We do this loop again below, but this is a light weight initialisation run.  Lazy, I know.
+    for i in range(1, Letter_Stat.longest_word+1):
+        positions[f"{i}"] = 0
+
     print("Letter Stats")
     for k in letters_dict.keys():
         if len(k) == 1:
             print(f"{k}:  {all_stats[k].letter_pos}")
+    
+            for i in range(1, Letter_Stat.longest_word+1):
+                posinst = pos_string(i)
+
+                try:
+                    positions[f"{i}"] += all_stats[k].letter_pos[posinst]
+                except KeyError:
+                    pass
+
+            # if k == "o":
+            #     print(f"{all_stats[k].letter_pos}")
+            #     positions[f"{k}"] = all_stats[k].letter_pos
+    Letter_Stat.positions = positions
+    # e.g. Letter_Stat.position['3']
+    return positions
+
+                # Important Note:  all_stats['a'].letter_pos['pos2']
 
 def save_to_df():
     df = pd.DataFrame(letters_dict)
     df.to_csv("sf_dataframe.csv")
+    
+
 
 words_sample = get_words()
 
@@ -199,7 +240,6 @@ pp = pprint.PrettyPrinter(indent=4)
 letters_dict = dict_tidy(letters_dict, word_len)
 
 all_stats = build_stats(letters_dict)
+positions = get_stats_per_letter(all_stats)
 print_stats(all_stats)
-print(Letter_Stat.word_count)
-save_to_df()
-print_stats_per_letter(all_stats)
+print(positions)
