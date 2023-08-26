@@ -29,13 +29,20 @@ class Letter_Stat():
     longest_word = 0
     total_letters = 0
     positions = {}
+    probabilities = {}
+
+    probability_high = 0.8
+    probability_medium = 0.4
+
+    high_prob_list = []
+    med_prob_list = []
+    low_prob_list = []
 
     def __init__(self, letter, letter_count=0, letter_pos={}) :
         self.letter = letter
         self.letter_count = letter_count
         self.letter_pos = letter_pos
-
-
+        
 longest_word_x = 0
 
 def get_words():
@@ -166,25 +173,38 @@ def print_stats(all_stats):
     probability = {}
     print(f"Word sample: {words_sample}\n\n")
     for k, v in letters_dict.items():
-        if len(k) == 1:
-            pct_letters = (v/Letter_Stat.total_letters) * 100
-            print(f"For {k}:  {v} letters in string ({pct_letters:.2f}%). In positions {all_stats[k].letter_pos}")
+        if k in letters_string:
+            if len(k) == 1:
+                pct_letters = round((v/Letter_Stat.total_letters) * 100, 2)
+                print(f"For {k}:  {v} letters in string ({pct_letters}%). In positions {all_stats[k].letter_pos}")
+                pospctmax = 0
 
-        for i in range(1, Letter_Stat.longest_word+1):
-            posinst = pos_string(i)
-            try:
-                posltr = all_stats[k].letter_pos[posinst]
-            except KeyError:
-                posltr = 0
+            # This looks complicated, but it's not too bad...
+            # 1.  Loop through the number of letters in the longerst word
+            # 2.  Look for that letter in each position (posltr)
+            # 3.  If found: calculate percentage probability of that letter against all letters in that position (pospct)
+            for i in range(1, Letter_Stat.longest_word+1):
+                posinst = pos_string(i)
+                try:
+                    posltr = all_stats[k].letter_pos[posinst]
+                except KeyError:
+                    posltr = 0
 
-            if posltr > 0:
-                pospct = (posltr/Letter_Stat.positions[f"{i}"]) * 100
-            else:
-                pospct = 0
-            
-            if pospct > 0:
-                print(f"Probability of {k} in position {i} = {pospct:.2f}%")
-            
+                if posltr > 0:
+                    pospct = (posltr/Letter_Stat.positions[f"{i}"]) * 100
+                else:
+                    pospct = 0
+                
+                if pospct > 0:
+                    print(f"Probability of {k} in position {i} = {pospct:.2f}%")
+                    Letter_Stat.positions[f"{k}{i}"] = pospct
+                
+                if pospct > pospctmax:
+                    pospctmax = pospct
+
+                probability[f"{k}max"] = pospctmax
+
+    Letter_Stat.probabilities = probability
 
 def get_stats_per_letter(all_stats):
     positions = {}
@@ -242,4 +262,7 @@ letters_dict = dict_tidy(letters_dict, word_len)
 all_stats = build_stats(letters_dict)
 positions = get_stats_per_letter(all_stats)
 print_stats(all_stats)
-print(positions)
+print("Positions:")
+print(Letter_Stat.positions)
+print("Probabilities:")
+pp.pprint(Letter_Stat.probabilities)
