@@ -1,6 +1,8 @@
 import os
 import pprint
 import pandas as pd
+import operator
+import math
 # Create a list of Sci Fi "Character" names based on the probability of letters appearing in places (first, second...) in words.
 
 # Note:  Starting with a Words List as a constant.  Ultimately, we will want to be able to:
@@ -21,6 +23,7 @@ word_len = {}
 # Dictionary of how often each letter appears at posn in word.
 posd = {}
 letters_string = "abcdefghijklmnopqrstuvwxyz"
+vowels_string = "aeiou"
 total_letters = 0
 
 class Letter_Stat(): 
@@ -30,13 +33,19 @@ class Letter_Stat():
     total_letters = 0
     positions = {}
     probabilities = {}
+    pos_probs = {}
 
     probability_high = 0.8
     probability_medium = 0.4
 
-    high_prob_list = []
-    med_prob_list = []
-    low_prob_list = []
+    high_prob_list = {}
+    med_prob_list = {}
+    low_prob_list = {}
+
+    max_word_len = 10
+    min_word_len = 3
+    min_vowels = 2
+    words_required = 10
 
     def __init__(self, letter, letter_count=0, letter_pos={}) :
         self.letter = letter
@@ -204,6 +213,7 @@ def print_stats(all_stats):
 
                 probability[f"{k}max"] = pospctmax
 
+                
     Letter_Stat.probabilities = probability
 
 def get_stats_per_letter(all_stats):
@@ -238,8 +248,48 @@ def get_stats_per_letter(all_stats):
 def save_to_df():
     df = pd.DataFrame(letters_dict)
     df.to_csv("sf_dataframe.csv")
-    
 
+def calc_prob_lists():
+    for k, v in Letter_Stat.positions.items():
+        letter = k[0]
+        if len(k) == 2 and letter in letters_string:
+            for i in range(1, Letter_Stat.longest_word):
+                if v >= Letter_Stat.probabilities[f"{letter}max"] * Letter_Stat.probability_high:
+                    Letter_Stat.high_prob_list[f"{i}"] =letter
+                elif v >= Letter_Stat.probabilities[f"{letter}max"] * Letter_Stat.probability_medium:
+                    Letter_Stat.med_prob_list[f"{i}"] = letter
+                else:
+                    Letter_Stat.low_prob_list[f"{i}"] = letter
+
+def prob_in_pos():
+    # pp = pprint.PrettyPrinter(indent=4)
+    # pp.pprint(Letter_Stat.positions.items())
+    vsum = 0
+    for i in range(1, Letter_Stat.longest_word):
+        for k, v in Letter_Stat.positions.items():
+            if k[0] in letters_dict:
+                if int(k[1]) == i:
+                    vsum += v
+                    try:
+                        Letter_Stat.pos_probs[f"{i}"] = Letter_Stat.pos_probs[f"{i}"] | {f"{k[0]}":f"{v:.2f}"}
+                    except KeyError:
+                        Letter_Stat.pos_probs[f"{i}"] = {f"{k[0]}":f"{v:.2f}"}
+
+
+def sort_by_position_with_print():
+    os.system('cls')
+    print(Letter_Stat.pos_probs['1'])
+    Letter_Stat.pos_probs['1'] = dict(sorted(Letter_Stat.pos_probs['1'].items(), key=operator.itemgetter(1), reverse=True))
+    print(Letter_Stat.pos_probs['1'])
+    print(len(Letter_Stat.pos_probs['1'].keys()))
+
+def sort_by_position():
+    for k in Letter_Stat.pos_probs.keys(): 
+        Letter_Stat.pos_probs[k] = dict(sorted(Letter_Stat.pos_probs[k].items(), key=operator.itemgetter(1), reverse=True))
+        
+        high_prob_list_len = math.floor(len(Letter_Stat.pos_probs[k].keys()) * Letter_Stat.probability_high)
+        med_prob_list_len = math.floor(len(Letter_Stat.pos_probs[k].keys()) * Letter_Stat.probability_medium)
+                             
 
 words_sample = get_words()
 
@@ -266,3 +316,10 @@ print("Positions:")
 print(Letter_Stat.positions)
 print("Probabilities:")
 pp.pprint(Letter_Stat.probabilities)
+calc_prob_lists()
+print(f"High: {Letter_Stat.high_prob_list}")
+print(f"Medium: {Letter_Stat.high_prob_list}")
+print(f"Low: {Letter_Stat.high_prob_list}")
+
+prob_in_pos()
+sort_by_position()
