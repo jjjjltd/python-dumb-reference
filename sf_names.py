@@ -3,6 +3,7 @@ import pprint
 import pandas as pd
 import operator
 import math
+import random
 # Create a list of Sci Fi "Character" names based on the probability of letters appearing in places (first, second...) in words.
 
 # Note:  Starting with a Words List as a constant.  Ultimately, we will want to be able to:
@@ -38,9 +39,12 @@ class Letter_Stat():
     probability_high = 0.8
     probability_medium = 0.4
 
-    high_prob_list = {}
-    med_prob_list = {}
-    low_prob_list = {}
+    high_prob_list_len = []
+    med_prob_list_len = []
+
+    high_prob_list = []
+    med_prob_list = []
+    low_prob_list = []
 
     max_word_len = 10
     min_word_len = 3
@@ -51,8 +55,20 @@ class Letter_Stat():
         self.letter = letter
         self.letter_count = letter_count
         self.letter_pos = letter_pos
-        
-longest_word_x = 0
+
+class Our_Words():
+
+    our_high_list = []
+    our_med_list = []
+    our_low_list = []
+    priority = ['h', 'h', 'h', 'm', 'm', 'l']
+
+    def __init__(self, our_word_len):
+        self.our_word_len = our_word_len
+
+    def words(self, words=[]):
+        self.words.append(words)
+
 
 def get_words():
     """  Prompt for list of words, or go with default WORDS_SAMPLE  """
@@ -185,7 +201,7 @@ def print_stats(all_stats):
         if k in letters_string:
             if len(k) == 1:
                 pct_letters = round((v/Letter_Stat.total_letters) * 100, 2)
-                print(f"For {k}:  {v} letters in string ({pct_letters}%). In positions {all_stats[k].letter_pos}")
+                # print(f"For {k}:  {v} letters in string ({pct_letters}%). In positions {all_stats[k].letter_pos}")
                 pospctmax = 0
 
             # This looks complicated, but it's not too bad...
@@ -205,7 +221,7 @@ def print_stats(all_stats):
                     pospct = 0
                 
                 if pospct > 0:
-                    print(f"Probability of {k} in position {i} = {pospct:.2f}%")
+                    # print(f"Probability of {k} in position {i} = {pospct:.2f}%")
                     Letter_Stat.positions[f"{k}{i}"] = pospct
                 
                 if pospct > pospctmax:
@@ -223,10 +239,10 @@ def get_stats_per_letter(all_stats):
     for i in range(1, Letter_Stat.longest_word+1):
         positions[f"{i}"] = 0
 
-    print("Letter Stats")
+    # print("Letter Stats")
     for k in letters_dict.keys():
         if len(k) == 1:
-            print(f"{k}:  {all_stats[k].letter_pos}")
+            # print(f"{k}:  {all_stats[k].letter_pos}")
     
             for i in range(1, Letter_Stat.longest_word+1):
                 posinst = pos_string(i)
@@ -271,9 +287,9 @@ def prob_in_pos():
                 if int(k[1]) == i:
                     vsum += v
                     try:
-                        Letter_Stat.pos_probs[f"{i}"] = Letter_Stat.pos_probs[f"{i}"] | {f"{k[0]}":f"{v:.2f}"}
+                        Letter_Stat.pos_probs[f"{i}"] = Letter_Stat.pos_probs[f"{i}"] | {f"{k[0]}":int(v)}
                     except KeyError:
-                        Letter_Stat.pos_probs[f"{i}"] = {f"{k[0]}":f"{v:.2f}"}
+                        Letter_Stat.pos_probs[f"{i}"] = {f"{k[0]}":int(v)}
 
 
 def sort_by_position_with_print():
@@ -284,12 +300,68 @@ def sort_by_position_with_print():
     print(len(Letter_Stat.pos_probs['1'].keys()))
 
 def sort_by_position():
-    for k in Letter_Stat.pos_probs.keys(): 
+    i = 0
+    for k in Letter_Stat.pos_probs.keys():
         Letter_Stat.pos_probs[k] = dict(sorted(Letter_Stat.pos_probs[k].items(), key=operator.itemgetter(1), reverse=True))
         
-        high_prob_list_len = math.floor(len(Letter_Stat.pos_probs[k].keys()) * Letter_Stat.probability_high)
-        med_prob_list_len = math.floor(len(Letter_Stat.pos_probs[k].keys()) * Letter_Stat.probability_medium)
-                             
+        keylen = len(Letter_Stat.pos_probs[k].keys())
+        Letter_Stat.high_prob_list_len.append(math.floor(keylen - (keylen) * Letter_Stat.probability_high))
+        Letter_Stat.med_prob_list_len.append(math.floor(keylen - (keylen) * Letter_Stat.probability_medium))
+        # print(f"list length {k}, key length{keylen}, high: {high_prob_list_len}, medium {med_prob_list_len}")
+
+        i += 1
+        for k, v in Letter_Stat.pos_probs[k].items():
+            if i <= Letter_Stat.high_prob_list_len[i-1]:
+                Letter_Stat.high_prob_list.append(f"{i},{k}")
+            elif i <= Letter_Stat.med_prob_list_len[i-1]:
+                Letter_Stat.med_prob_list.append(f"{i},{k}")
+            else:
+                Letter_Stat.low_prob_list.append(f"{i},{k}")
+            
+def gen_words():
+    
+    our_word_len = random.randint(Letter_Stat.min_word_len, Letter_Stat.max_word_len)
+    our_words = Our_Words(our_word_len)
+    itemno = 0
+    g_word = []
+    for l in range(1, our_word_len):
+        for item in Letter_Stat.high_prob_list:
+            breakdown = item.split(",")
+            pos_in_string = int(breakdown[0])
+            itemno += 1
+            if pos_in_string == l: 
+
+                # We hit a problem is our random word length if greater than longest word in string...
+                if itemno <= len(Letter_Stat.high_prob_list_len)-1:
+                    chkindex = itemno
+                else:
+                    chkindex = random.randint(0, len(Letter_Stat.med_prob_list_len)-1)
+
+                if itemno <= Letter_Stat.high_prob_list_len[chkindex]:
+                    Our_Words.our_high_list.append(breakdown[1])
+                elif itemno <= Letter_Stat.med_prob_list_len[chkindex]:
+                    Our_Words.our_med_list.append(breakdown[1])
+                else:
+                    Our_Words.our_low_list.append(breakdown[1])
+
+        
+        list_choice = random.choice(Our_Words.priority)
+        if list_choice == "h":
+            letter_choice = random.choice(Our_Words.our_high_list)
+        elif list_choice == "m":
+            letter_choice = random.choice(Our_Words.our_med_list)
+        else:
+            letter_choice = random.choice(Our_Words.our_low_list)
+
+        g_word.append(letter_choice)
+
+    sword=""
+    for i in g_word:
+        sword+=i
+
+    print(sword)
+        # print(f"m: {Our_Words.our_med_list}")
+        # print(f"l: {Our_Words.our_low_list}")
 
 words_sample = get_words()
 
@@ -312,14 +384,17 @@ letters_dict = dict_tidy(letters_dict, word_len)
 all_stats = build_stats(letters_dict)
 positions = get_stats_per_letter(all_stats)
 print_stats(all_stats)
-print("Positions:")
-print(Letter_Stat.positions)
-print("Probabilities:")
-pp.pprint(Letter_Stat.probabilities)
-calc_prob_lists()
-print(f"High: {Letter_Stat.high_prob_list}")
-print(f"Medium: {Letter_Stat.high_prob_list}")
-print(f"Low: {Letter_Stat.high_prob_list}")
-
+# print("Positions:")
+# print(Letter_Stat.positions)
+# print("Probabilities:")
+# pp.pprint(Letter_Stat.probabilities)
+# calc_prob_lists()
 prob_in_pos()
 sort_by_position()
+# print(f"High: {Letter_Stat.high_prob_list}")
+# print(f"Medium: {Letter_Stat.med_prob_list}")
+# print(f"Low: {Letter_Stat.low_prob_list}")
+
+our_word_len = random.randint(Letter_Stat.min_word_len, Letter_Stat.max_word_len)
+for i in range(our_word_len):
+    gen_words()
