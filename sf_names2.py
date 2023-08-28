@@ -20,24 +20,6 @@ class Letter_Stat():
 
     pos_dict = {}
     letters_dict = {}
-    # positions = {}
-    # probabilities = {}
-    # pos_probs = {}
-
-    probability_high = 0.8
-    probability_medium = 0.4
-
-    high_prob_list_len = []
-    med_prob_list_len = []
-
-    high_prob_list = []
-    med_prob_list = []
-    low_prob_list = []
-
-    max_word_len = 10
-    min_word_len = 3
-    min_vowels = 2
-    words_required = 10
 
     def __init__(self, letter, letter_count=0, letter_pos={}) :
         self.letter = letter
@@ -46,11 +28,24 @@ class Letter_Stat():
 
 class Our_Words():
 
-    our_high_list = []
-    our_med_list = []
-    our_low_list = []
     priority = ['h', 'h', 'h', 'm', 'm', 'l']
     words_sample = ""
+    all_probs = {}
+
+    probability_high = 0.8
+    probability_medium = 0.4
+
+    high_prob_list = []
+    med_prob_list = []
+    low_prob_list = []
+
+
+
+    max_word_len = 10
+    min_word_len = 3
+    min_vowels = 2
+    words_required = 100
+
 
 def count_letter_incidents(l):
     """  Count how often each letter occurs in string.  """
@@ -137,6 +132,90 @@ def calc_letter_probs():
                 pis = round((lip / Letter_Stat.count_letters) * 100, 2)
                 Letter_Stat.letters_dict[f"{letter}pip{i+1}"] = pip
                 Letter_Stat.letters_dict[f"{letter}pis"] = pis
+    
+    for i in range(Our_Words.words_required):
+        build_prob_lists()
+
+def vowel_counter(gen_word):
+    vowel_count = 0
+    for i in range(len(gen_word)):
+        if gen_word[i] in Letter_Stat.vowel_string:
+                vowel_count += 1
+
+    return vowel_count
+
+def vowel_adjust(gen_word):
+    vowel_count = 0
+    while vowel_count < Our_Words.min_vowels:
+        letter_pos = random.randint(0, len(gen_word)-1) 
+        if gen_word[letter_pos] not in Letter_Stat.vowel_string:
+            gen_word[letter_pos] = random.choice(Letter_Stat.vowel_string)
+
+        vowel_count = vowel_counter(gen_word)
+
+    final_word = ""
+    for i in range(len(gen_word)):
+        final_word += gen_word[i]
+    
+    return final_word
+
+    
+
+def build_prob_lists():
+    """ Build high/med/low letter lists, and select random leters to build word.  """
+
+    # Get world length
+    gen_word = []
+    our_word_len = random.randint(Our_Words.min_word_len, Our_Words.max_word_len)
+
+
+    for i in range(0, our_word_len):
+        for k, v in Letter_Stat.letters_dict.items():
+            for letter in Letter_Stat.letters_list:
+            # Letter_Stat.pos_probs['1'] = dict(sorted(Letter_Stat.pos_probs['1'].items(), key=operator.itemgetter(1), reverse=True))
+                if k == f"{letter}pip{i+1}": 
+                    Our_Words.all_probs = Our_Words.all_probs | {f"{k[0]}":v}
+
+        Our_Words.all_probs = dict(sorted(Our_Words.all_probs.items(), key=operator.itemgetter(1), reverse=True))
+        
+        # Calculate high probability list length:
+        keylen =  len(Our_Words.all_probs.keys())
+        hll = math.floor(keylen - (keylen * Our_Words.probability_high))
+        mll = math.floor(keylen - (keylen * Our_Words.probability_medium))
+
+        j = 0
+        for k in Our_Words.all_probs:
+            j += 1
+            if j <= hll:
+                Our_Words.high_prob_list.append(f"{k}")
+            elif j <= mll:
+                Our_Words.med_prob_list.append(f"{k}")
+            else:
+                Our_Words.low_prob_list.append(f"{k}") 
+
+        list_choice = random.choice(Our_Words.priority)
+        if list_choice == "h":
+            letter_choice = random.choice(Our_Words.high_prob_list)
+        elif list_choice == "m":
+            letter_choice = random.choice(Our_Words.med_prob_list)
+        else:
+            letter_choice = random.choice(Our_Words.low_prob_list)
+
+        gen_word.append(letter_choice)
+
+    final_word = ""
+    for i in range(len(gen_word)):
+        vowel_count = vowel_counter(gen_word)
+        final_word += gen_word[i]
+
+    if vowel_count < Our_Words.min_vowels:
+        final_word = vowel_adjust(gen_word)
+
+        
+
+    print(final_word)
+
+
 
 def proc_words1():
     Letter_Stat.words_list = Our_Words.words_sample.split(" ")
@@ -168,6 +247,4 @@ def proc_words1():
 get_words()
 proc_words1()
 
-pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(Letter_Stat.letters_dict)   
-pp.pprint(Letter_Stat.pos_dict)   
+print("x")

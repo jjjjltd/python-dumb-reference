@@ -42,14 +42,9 @@ class Letter_Stat():
     high_prob_list_len = []
     med_prob_list_len = []
 
-    high_prob_list = []
-    med_prob_list = []
-    low_prob_list = []
+    
 
-    max_word_len = 10
-    min_word_len = 3
-    min_vowels = 2
-    words_required = 10
+
 
     def __init__(self, letter, letter_count=0, letter_pos={}) :
         self.letter = letter
@@ -58,10 +53,16 @@ class Letter_Stat():
 
 class Our_Words():
 
-    our_high_list = []
-    our_med_list = []
-    our_low_list = []
+    high_prob_list = []
+    med_prob_list = []
+    low_prob_list = []
+
     priority = ['h', 'h', 'h', 'm', 'm', 'l']
+
+    max_word_len = 10
+    min_word_len = 3
+    min_vowels = 2
+    words_required = 10
 
     def __init__(self, our_word_len):
         self.our_word_len = our_word_len
