@@ -1,0 +1,10 @@
+This is line: 1 in a different directory
+This is line: 2 in a different directory
+This is line: 3 in a different directory
+This is line: 4 in a different directory
+This is line: 5 in a different directory
+This is line: 6 in a different directory
+This is line: 7 in a different directory
+This is line: 8 in a different directory
+This is line: 9 in a different directory
+This is line: 10 in a different directory

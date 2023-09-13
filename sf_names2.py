@@ -44,7 +44,7 @@ class Our_Words():
     max_word_len = 10
     min_word_len = 3
     min_vowels = 2
-    words_required = 100
+    words_required = 10
 
 
 def count_letter_incidents(l):
@@ -246,5 +246,3 @@ def proc_words1():
                 
 get_words()
 proc_words1()
-
-print("x")
