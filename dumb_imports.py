@@ -37,7 +37,7 @@ def dictproc():
             print(f"The highest bidder is: {name} who bid:  {highest}")
 
 def listproc():
-    print("Create and print a list.\n")
+    
     list = ["mango", "strawberry", "orange", "apple", "banana"]
     print(list)
 

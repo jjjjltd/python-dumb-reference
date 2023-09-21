@@ -1,10 +1,23 @@
 import dumb_imports as f
+import os
 
+print("*** Example of help, printing docstring *** \n\n")
+print(help(f.dictprint))
+print("*** Example dictionary populate and print *** \n\n")
 f.dictprint()
+print("*** Example of populating dict from input, and processing *** \n\n")
 f.dictproc()
+print("*** Create and print a list. ***\n\n")
 f.listproc()
+print("*** Create and print a tuple. ***\n\n")
 f.tupleexample()
+print("*** Simple Class import/create instance/print... ***\n\n")
 f.classdefinition()
+print("*** Quick revision of arg, args and kwargs - with example. ***\n\n")
 f.all_args(4, 7, 3, 0, x=10, y=64)
+print("*** Print substitution variables with example formatting (not f-string, which would probably be better. ***\n\n) ***\n\n")
 f.printsubstitutionvariables()
-
+print("*** Example text file (which could be csv/whatever) write.  Also 'call' python script. *** \n\n")
+os.system("python writetxt.py")
+print("*** Very simple multi-processing example ***\n\n")
+os.system("python multiprocess.py")
