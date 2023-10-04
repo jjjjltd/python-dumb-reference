@@ -1,16 +1,41 @@
 import logo from './logo.svg';
 import './App.css';
 
-function MyButton() {
+function ParseList() {
+
+  const listsample = [
+    { title: "Cabbage", id: 1 },
+    { title: "Garlic", id: 2 },
+    { title: "Apple", id: 3 },
+  ]
+
+  const listItems = listsample.map(listsample =>
+      <li key={listsample.id}>
+        {listsample.title}
+      </li>
+  );
+
     return (
-        <div>
-            <p>This is returned from the MyButton function in App.JS</p>
-            <button>
-                I'm a button
-            </button>
-        </div>
+      <div>
+        <h3>This is returned from the ParseList function.</h3>
+        <ul>{listItems}</ul>
+      </div>
     );
+
+}
+function MyButton() {
+  function handleClick() {
+    alert('You clicked me!');
   }
+  return (
+      <div>
+          <p>This is returned from the MyButton function in App.JS</p>
+          <button onClick={handleClick}>
+              I'm a button
+          </button>
+      </div>
+  );
+}
 
   function AboutPage() {
     return (
@@ -50,6 +75,7 @@ function MyButton() {
         <StartApp />
         <MyButton />
         <AboutPage />
+        <ParseList />
       </div>
     );
   }
