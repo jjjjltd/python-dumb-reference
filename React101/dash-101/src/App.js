@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function ParseList() {
 
@@ -24,14 +25,31 @@ function ParseList() {
 
 }
 function MyButton() {
+  const [count, setCount] = useState(0);
   function handleClick() {
-    alert('You clicked me!');
+    setCount(count + 1)
   }
   return (
       <div>
           <p>This is returned from the MyButton function in App.JS</p>
           <button onClick={handleClick}>
               I'm a button
+          </button>
+          <p>The count variable, set by setCount = {count}.</p>
+      </div>
+  );
+}
+
+function MyButton2() {
+  const [count, setCount] = useState(0);
+  function handleClick() {
+    setCount(count + 1)
+  }
+  return (
+      <div>
+          <p>This is returned from the MyButton2 function in App.JS</p>
+          <button onClick={handleClick}>
+              Clicked {count} times
           </button>
       </div>
   );
@@ -60,7 +78,7 @@ function MyButton() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            Learn React Here!!!
           </a>
         </header>
       </div>
@@ -74,6 +92,8 @@ function MyButton() {
         <h2>See below for more stuff after the default logo display</h2>
         <StartApp />
         <MyButton />
+        <MyButton2 />
+        <MyButton2 />
         <AboutPage />
         <ParseList />
       </div>
