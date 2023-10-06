@@ -61,6 +61,24 @@ function EvenCount() {
   )  
 }
 
+function OddRender () {
+  return (
+  <div>
+      <h3>That is an odd number</h3>
+      <p></p>
+      <break />
+      <img src="https://2.bp.blogspot.com/-Yy-ClpieHIM/V2y-oyBkkBI/AAAAAAAAAy0/n1-syp2OI208KWc226olVGYifRkWV6dawCLcB/s1600/yikes.png" className="App-logo" alt="logo" />
+      <a 
+            className="App-link"
+            href="https://2.bp.blogspot.com/-Yy-ClpieHIM/V2y-oyBkkBI/AAAAAAAAAy0/n1-syp2OI208KWc226olVGYifRkWV6dawCLcB/s1600/yikes.png"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+          </a>
+  </div>
+  )
+}
+
 function MyButton() {
 
   const [count, setCount] = useState(0);
@@ -68,13 +86,7 @@ function MyButton() {
     setCount(count + 1)
   }
 
-  let content;
-  if ({count} % 2 > 0) {
-    content = <EvenCount />
-  } else {
-    content = <OddCount />
-  };
-
+  const oddeven = (count % 2 === 0) ? <p>Even number entered.</p> : <OddRender /> 
   return (
       <div>
           <h2>This is returned from the MyButton function in App.JS</h2>
@@ -83,7 +95,7 @@ function MyButton() {
           </button>
           <p>The count variable, set by setCount = {count}.</p>
           <p>{count} % 2 = {count % 2}</p>
-          {content}
+          {oddeven}
       </div>
   );
 }
