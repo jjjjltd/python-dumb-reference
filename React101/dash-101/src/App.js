@@ -49,18 +49,6 @@ function ParseList() {
 
 }
 
-function OddCount() {
-  return (
-    <p>Odd count from function</p>
-  )  
-}
-
-function EvenCount() {
-  return (
-    <p>Even count from function</p>
-  )  
-}
-
 function OddRender () {
   return (
   <div>
