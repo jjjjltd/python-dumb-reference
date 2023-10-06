@@ -28,6 +28,17 @@
   color: #61dafb;
 }
 
+.yikes {
+  position: relative;
+  scale: 0.5;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .yikes {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -67,9 +67,9 @@ function OddRender () {
       <h3>That is an odd number</h3>
       <p></p>
       <break />
-      <img src="https://2.bp.blogspot.com/-Yy-ClpieHIM/V2y-oyBkkBI/AAAAAAAAAy0/n1-syp2OI208KWc226olVGYifRkWV6dawCLcB/s1600/yikes.png" className="App-logo" alt="logo" />
+      <img src="https://2.bp.blogspot.com/-Yy-ClpieHIM/V2y-oyBkkBI/AAAAAAAAAy0/n1-syp2OI208KWc226olVGYifRkWV6dawCLcB/s1600/yikes.png" className="yikes" alt="logo" />
       <a 
-            className="App-link"
+            className="app-link"
             href="https://2.bp.blogspot.com/-Yy-ClpieHIM/V2y-oyBkkBI/AAAAAAAAAy0/n1-syp2OI208KWc226olVGYifRkWV6dawCLcB/s1600/yikes.png"
             target="_blank"
             rel="noopener noreferrer"
@@ -94,7 +94,7 @@ function MyButton() {
               I'm a button
           </button>
           <p>The count variable, set by setCount = {count}.</p>
-          <p>{count} % 2 = {count % 2}</p>
+          <h2>This is returned based on oddeven conditioning in MyButton function.</h2>
           {oddeven}
       </div>
   );
