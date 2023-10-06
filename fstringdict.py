@@ -1,7 +1,7 @@
 import random
 d1 = {
     "eleanor": {"eleanordesc": "child", "eleanorage": 15},
-    "roses": {"rosesdesc": "spotty cat", "rosesage": 10},
+    "roses": {"rosesdesc": "spotty cat", "rosesage": 6},
     "maple": {"mapledesc": "mapley cat", "mapleage": "roses age + 3 minutes"},
     "alaca": {"alacadesc": "shaggy dog", "alacaage": "senile"}
 }

@@ -35,7 +35,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .yikes {
-    animation: App-logo-spin infinite 20s linear;
+    animation: yikes-spin infinite 3s linear;
   }
 }
 
@@ -45,5 +45,14 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes yikes-spin {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
   }
 }
