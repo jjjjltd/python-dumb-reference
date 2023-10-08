@@ -161,6 +161,12 @@ function MyButton2() {
   }
   
   export default function MyApp() {
+    const [count_shared, setCount] = useState(0);
+
+    function handleClick3() {
+      setCount(count_shared + 1);
+    }  
+
     return (
       <div>
         <h1>Welcome to my app</h1>
@@ -173,7 +179,19 @@ function MyButton2() {
         <AboutPage />
         <ParseList />
         <ShoppingList />
+        <MyButton3 count={count_shared} onclick={handleClick3}/>
+        <MyButton3 count={count_shared} onclick={handleClick3}/>
       </div>
     );
   }
   
+  function MyButton3({ count_shared, onClick }) {
+    return (
+      <div>
+        <p>Count shared {count_shared}</p>
+        <button onClick={onClick}>
+          Clicked {count_shared} times
+        </button>
+        </div>
+    );
+  }
