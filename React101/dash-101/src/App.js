@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import Testjsx from './testimport';
 
 const user = {
   name: 'Hedy Lamarr',
@@ -159,6 +160,74 @@ function MyButton2() {
       </div>
     );
   }
+
+    function Input1() {
+    const [name, setName] = useState("");
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      alert(`The name you entered was: ${name}`)
+    }
+  
+    return (
+      <div>
+        <h2>Input1 function, returning name entry to handleSubmit for Alert display.</h2>
+        <form onSubmit={handleSubmit}>
+          <label>Enter your name:
+            <input 
+              type="text" 
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <input type="submit" />
+        </form>
+      </div>
+    )
+  }
+
+  function Input2() {
+    const [inputs, setInputs] = useState({});
+  
+    const handleChange2 = (event) => {
+      const name = event.target.username;
+      const value = event.target.value;
+      setInputs(values => ({...values, [name]: value}))
+      console.log(values => ({...values, [name]: value}))
+    }
+  
+    const handleSubmit2 = (event) => {
+      event.preventDefault();
+      alert("Hitting this point.", event.target.username)
+      alert(inputs);
+    }
+  
+    return (
+      <div>
+        <h2>Input2 function, returning 2 entries to handleSubmit for Alert display.</h2>
+        <form onSubmit={handleSubmit2}>
+          <label>Enter your name:
+          <input 
+            type="text" 
+            name="username" 
+            value={inputs.username || ""} 
+            onChange={handleChange2}
+          />
+          </label>
+          <label>Enter your age:
+            <input 
+              type="number" 
+              name="age" 
+              value={inputs.age || ""} 
+              onChange={handleChange2}
+            />
+            </label>
+            <input type="submit" />
+        </form>
+      </div>
+    )
+  }
+
   
   export default function MyApp() {
     const [count_shared, setCount] = useState(0);
@@ -179,8 +248,12 @@ function MyButton2() {
         <AboutPage />
         <ParseList />
         <ShoppingList />
-        <MyButton3 count={count_shared} onclick={handleClick3}/>
-        <MyButton3 count={count_shared} onclick={handleClick3}/>
+        <Testjsx />
+        <h2>MyButton3, shared counter, needs later remediation.</h2>
+        <MyButton3 count_shared={count_shared} onclick={handleClick3}/>
+        <MyButton3 count_shared={count_shared} onclick={handleClick3}/>
+        <Input1 />
+        <Input2 />
       </div>
     );
   }
