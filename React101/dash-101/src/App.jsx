@@ -231,6 +231,9 @@ function MyButton2() {
 
   
   export default function MyApp() {
+    const handleClick3 = (num) => {
+      alert('handleClick3 in App.jsx ' + num)
+    }
   
     return (
       <div>
@@ -242,7 +245,8 @@ function MyButton2() {
         <MyButton2 />
         <MyButton2 />
         <h2>MyButton3 WIP!!</h2>
-        <MyButton3 />
+        <MyButton3 makeClick={handleClick3} />
+        <MyButton3 makeClick={handleClick3}/>
         <h2>End of MyButton3 WIP!!</h2>
         <AboutPage />
         <ParseList />
