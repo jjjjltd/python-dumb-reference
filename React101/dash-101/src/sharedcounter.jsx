@@ -1,22 +1,19 @@
-
+import React from 'react'
 
 export default function MyButton3() {
-    
-    function counter () {
-        const [count_shared, setCount] = useState(0);
-    
-        function handleClick3() {
-          setCount(count_shared + 1);
-        }  
-    
+
+  const handleClick3 = (num) => {
+    alert(num + ' abc')
+    return () => {
+      <p>Return value: {num}</p>
     }
 
-    return (
-      <div>
-        <p>Count shared {count_shared}</p>
-        <button onClick={onClick}>
-          Clicked {count_shared} times
-        </button>
-        </div>
-    );
   }
+    const num = 3
+    return (
+      
+      <button onClick={() => handleClick3(num)}>Button</button>
+      
+    )
+
+}

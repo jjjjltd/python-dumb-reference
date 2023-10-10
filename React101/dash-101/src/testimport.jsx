@@ -7,7 +7,7 @@ export default function Testjsx (props) {
                 <li>Required export default on function header.</li>
                 <li>Got a reminder to be careful of capitalisation!!!  <b>t</b>estjsx function name did not work.</li>
             </ul>
-        <p>Example of "props" parameter passing:  First name: {props.firstname}, surname: {props.lastname}.</p>
+        <p>Example of "props" parameter passing:  First name: <b>{props.firstname}</b>, surname: <b>{props.lastname}</b>.</p>
     </div>
     )
 }
