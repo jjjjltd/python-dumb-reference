@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import Profile from './rubbish.jsx'
+import Profile from './rubbish'
+import Controls from './Controls'
 
 function Thing() {
   return (
@@ -14,7 +15,7 @@ function Thing() {
 function App() {
   return (
     <div className="App">
-      
+      <Controls />
       <header className="App-header">
       
         <img src={logo} className="App-logo" alt="logo" />
