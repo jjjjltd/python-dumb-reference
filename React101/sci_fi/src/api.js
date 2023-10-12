@@ -9,7 +9,7 @@ const requests = {
 }
 
 const endPoints = {
-    control: () => requests.get("/control")
+    control: () => requests.get("/control"),
 }
 
 export default endPoints

@@ -28,6 +28,19 @@
   color: #61dafb;
 }
 
+.controls {
+  background-color: #7e3428;
+  min-height: 5vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-left: 50px;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(360deg);
