@@ -22,10 +22,20 @@ const loadControl = async () => {
         <div className="ctlheader">
                     <h2>Word Controls</h2>
             <div class="controls">
-                <p>Maximum word length:  {controls["maxwordlen"]} </p>
-                <p>Minimum word length:  {controls["minwordlen"]} </p>
-                <p>Minimum vowels:  {controls["minvowels"]} </p>
-                <p>Number of words:  {controls["numwords"]} </p>
+                <table>
+                    <tr>
+                        <th>Maximum word length</th>
+                        <th>Minimum word length</th>
+                        <th>Minimum vowels</th>
+                        <th>Number of words</th>
+                    </tr>
+                    <tr>
+                        <td><input type="number" value={controls["maxwordlen"]}/> </td>
+                        <td><input type="number" value={controls["minwordlen"]} /></td>
+                        <td><input type="number" value={controls["minvowels"]} /></td>
+                        <td><input type="number" value={controls["numwords"]} /></td>
+                    </tr>
+                </table>
             </div>
         </div>
     )
