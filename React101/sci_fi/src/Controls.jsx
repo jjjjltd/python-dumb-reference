@@ -17,23 +17,20 @@ const loadControl = async () => {
     console.log(controls)
 }
 
-
     return (
         <div className="ctlheader">
-                    <h2>Word Controls</h2>
+                    <h1>Word Controls</h1>
             <div class="controls">
                 <table>
                     <tr>
-                        <th>Maximum word length</th>
-                        <th>Minimum word length</th>
-                        <th>Minimum vowels</th>
-                        <th>Number of words</th>
-                    </tr>
-                    <tr>
-                        <td><input type="number" value={controls["maxwordlen"]}/> </td>
-                        <td><input type="number" value={controls["minwordlen"]} /></td>
-                        <td><input type="number" value={controls["minvowels"]} /></td>
-                        <td><input type="number" value={controls["numwords"]} /></td>
+                        <td class="ctlh">Max length</td>
+                        <td><input class="ctl" type="number" placeholder={controls["maxwordlen"]}/></td>
+                        <td class="ctlh">Min length</td>
+                        <td><input class="ctl"type="number" placeholder={controls["minwordlen"]}/></td>
+                        <td class="ctlh" >Min vowels</td>
+                        <td><input  class="ctl" type="number" placeholder={controls["minvowels"]}/></td>
+                        <td class="ctlh">Word count</td>
+                        <td><input  class="ctl"type="number" placeholder={controls["numwords"]}/></td>
                     </tr>
                 </table>
             </div>

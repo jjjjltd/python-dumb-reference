@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from sf_words import WORDS_SAMPLE
 
 
 app = Flask(__name__)
@@ -16,6 +17,10 @@ def control():
             "minwordlen": 3,
             "minvowels": 2,
             "numwords": 10}
+
+@app.get("/sample")
+def sample():
+    return WORDS_SAMPLE.lower()
 
 
 if __name__ == "__main__":

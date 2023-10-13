@@ -10,6 +10,7 @@ const requests = {
 
 const endPoints = {
     control: () => requests.get("/control"),
+    sample: () => requests.get("/sample")
 }
 
 export default endPoints

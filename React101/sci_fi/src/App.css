@@ -31,14 +31,38 @@
 .controls {
   background-color: #7e3428;
   min-height: 5vh;
-  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
   margin-left: 50px;
+  width: 100%
 }
+
+.ctlh {
+  column-width: 20px;
+  font-size: small;
+  text-wrap: break-word;
+}
+
+.ctlheader {
+  font-size: 50px;
+}
+
+.ctl {
+  column-width: 5px;
+  
+  font-size: large;
+  color: black;
+}
+
+textarea {
+  width: 80%;
+  height: 500px;
+  font-size: 33px;
+}
+
 
 table, th, td {
   border: 1px solid black;
