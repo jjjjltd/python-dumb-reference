@@ -16,7 +16,9 @@ const loadSample = async () => {
 }
     return (
         <div className="wordsample">
-            <h2 classname="ctlheader">Word Sample</h2>
+            <div className="ctlheader">
+                <h1>Word Sample</h1>
+            </div>
             <p>Type (or paste) the word sample that you would like to generate sci-fi names from</p>
             <textarea placeholder={sample}></textarea>
             <br />
