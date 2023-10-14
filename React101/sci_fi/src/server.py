@@ -1,6 +1,7 @@
-from flask import Flask, jsonify, request
+from flask import Flask, json, request
 from flask_cors import CORS
 from sf_words import WORDS_SAMPLE
+import logging
 
 
 app = Flask(__name__)
@@ -21,6 +22,14 @@ def control():
 @app.get("/sample")
 def sample():
     return WORDS_SAMPLE.lower()
+
+@app.route('/genwords', methods=['POST'])
+def genwords():
+    print("form data, ", request.get_data())
+    data = request.get_data
+    print(request.data)
+    return request.get_data()
+    # return json.dumps({'sample': request.form['sample']})
 
 
 if __name__ == "__main__":
