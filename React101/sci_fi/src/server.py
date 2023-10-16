@@ -17,7 +17,8 @@ def control():
     return {"maxwordlen": 10,
             "minwordlen": 3,
             "minvowels": 2,
-            "numwords": 10}
+            "numwords": 10,
+            "db_on": True}
 
 @app.get("/sample")
 def sample():
