@@ -16,6 +16,7 @@ const loadSample = async () => {
 }
 
 function sendSample () {
+    console.log("Hit sendSample.")
     const data = endPoints.genwords();
     console.log(data)
 }
@@ -23,13 +24,15 @@ function sendSample () {
 
     return (
         <div className="wordsample">
-            <div className="ctlheader">
-                <h1>Word Sample</h1>
-            </div>
-            <p>Type (or paste) the word sample that you would like to generate sci-fi names from</p>
-            <textarea placeholder={sample}></textarea>
-            <br />
-            <button type="submit" onClick="sendSample()" name="genwords">Generate <br/> names</button>
+            <form>
+                <div className="ctlheader">
+                    <h1>Word Sample</h1>
+                </div>
+                <p>Type (or paste) the word sample that you would like to generate sci-fi names from</p>
+                <textarea placeholder={sample}></textarea>
+                <br />
+                <button type="submit" onClick="sendSample()" name="genwords">Generate <br/> names</button>
+            </form>
         </div>
     )
 }
