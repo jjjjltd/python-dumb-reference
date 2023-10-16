@@ -42,8 +42,10 @@
 
 .ctlh {
   column-width: 20px;
-  font-size: small;
+  font-size: xx-large;
   text-wrap: break-word;
+  text-wrap: True;
+
 }
 
 .ctlheader {
@@ -52,7 +54,6 @@
 
 .ctl {
   column-width: 5px;
-  
   font-size: large;
   color: black;
 }
@@ -63,8 +64,12 @@ textarea {
   font-size: 33px;
 }
 
+table {
+  table-layout: auto;
+  width: 100%;
+}
 
-table, th, td {
+th, td {
   border: 1px solid black;
 }
 

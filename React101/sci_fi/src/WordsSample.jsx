@@ -12,11 +12,10 @@ export default function WordSample() {
 const loadSample = async () => {
     const data = await endPoints.sample();
     setWordSample(sample=data)
-    console.log(sample)
 }
 
-function sendSample () {
-    console.log("Hit sendSample.")
+function handleClick() {
+    console.log("Hit handleClick.")
     const data = endPoints.genwords();
     console.log(data)
 }
@@ -29,9 +28,11 @@ function sendSample () {
                     <h1>Word Sample</h1>
                 </div>
                 <p>Type (or paste) the word sample that you would like to generate sci-fi names from</p>
-                <textarea placeholder={sample}></textarea>
+                <textarea placeholder={sample} id="w"></textarea>
                 <br />
-                <button type="submit" onClick="sendSample()" name="genwords">Generate <br/> names</button>
+                <button type="submit" onClick={handleClick} name="genwords">
+                    Names
+                </button>
             </form>
         </div>
     )

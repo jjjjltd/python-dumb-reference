@@ -3,41 +3,40 @@ import endPoints from './api';
 
 export default function Controls() {
     let [controls, setControls] = useState("");
-    let [db_on, setDb_On] = useState(false);
-    
+    let [db_on, setDb_On] = useState("False");
+
     // Render the screen - one TimeRanges.
     useEffect(() => {
-        console.log("Controls.jsx rendered");
         loadControl()
     }, [])
 
 const loadControl = async () => {
     const data = await endPoints.control();
-    console.log(data)
-    setControls(controls=data)
-    console.log(controls)
+    setControls(controls=data);
 
-    
     setDb_On(controls["db_on"] ? db_on = "True": db_on = "False")
 }
 
     return (
         <div className="ctlheader">
                     <h1>Word Controls</h1>
-            <div class="controls">
+            <div className="controls">
                 <table>
-                    <tr>
-                        <td class="ctlh">Max length</td>
-                        <td><input class="ctl" type="number" placeholder={controls["maxwordlen"]}/></td>
-                        <td class="ctlh">Min length</td>
-                        <td><input class="ctl"type="number" placeholder={controls["minwordlen"]}/></td>
-                        <td class="ctlh" >Min vowels</td>
-                        <td><input  class="ctl" type="number" placeholder={controls["minvowels"]}/></td>
-                        <td class="ctlh">Word count</td>
-                        <td><input  class="ctl"type="number" placeholder={controls["numwords"]}/></td>
-                        <td class="ctlh">Database</td>
-                        <td><input  class="ctl"type="text" placeholder={db_on} /></td>
-                    </tr>
+                    <tbody>                    
+                        <tr>
+                            <td className="ctlh">Max length id="mlt"</td>
+                            <td><input className="ctl" type="number" placeholder={controls["maxwordlen"]} id="ml"/></td>
+                            <td className="ctlh">Min length id = "mint"</td>
+                            <td><input className="ctl"type="number" placeholder={controls["minwordlen"]} id="min"/></td>
+                            <td className="ctlh" id="mvt" >Min vowels</td>
+                            <td><input  className="ctl" type="number" placeholder={controls["minvowels"]} id="mv"/></td>
+                            <td className="ctlh" id="wct">Word count</td>
+                            <td><input  className="ctl"type="number" placeholder={controls["numwords"]} id="wc"/></td>
+                            <td className="ctlh" id="dbt">DB On</td>
+                            <td><input  className="ctl"type="text" placeholder={db_on} id="db"/></td>
+                        </tr>
+                    </tbody>
+
                 </table>
             </div>
         </div>
