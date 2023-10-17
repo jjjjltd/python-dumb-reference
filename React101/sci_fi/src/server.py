@@ -26,7 +26,7 @@ def sample():
 
 @app.route('/genwords', methods=['POST'])
 def genwords():
-    print("form data, ", request.get_data())
+    print("form data, ", request.data)
     data = request.get_data
     print(request.data)
     return request.get_data()

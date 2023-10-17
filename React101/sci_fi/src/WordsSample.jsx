@@ -14,8 +14,8 @@ const loadSample = async () => {
     setWordSample(sample=data)
 }
 
-function handleClick() {
-    console.log("Hit handleClick.")
+function sendSample() {
+    console.log("Hit sendSample:")
     const data = endPoints.genwords();
     console.log(data)
 }
@@ -23,16 +23,15 @@ function handleClick() {
 
     return (
         <div className="wordsample">
-            <form>
+            
                 <div className="ctlheader">
                     <h1>Word Sample</h1>
                 </div>
                 <p>Type (or paste) the word sample that you would like to generate sci-fi names from</p>
-                <textarea placeholder={sample} id="w"></textarea>
+            <form id="wordform" action="post">
+                <textarea placeholder={sample} id="w" name="words"></textarea>
                 <br />
-                <button type="submit" onClick={handleClick} name="genwords">
-                    Names
-                </button>
+                <button type="submit" onClick={sendSample()} name="genwords">Names</button>
             </form>
         </div>
     )
