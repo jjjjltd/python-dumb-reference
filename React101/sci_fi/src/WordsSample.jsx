@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import endPoints from './api';
+import axios from 'axios';
 
 export default function WordSample() {
 
@@ -14,10 +15,12 @@ const loadSample = async () => {
     setWordSample(sample=data)
 }
 
+
 function sendSample() {
-    console.log("Hit sendSample:")
-    const data = endPoints.genwords();
-    console.log(data)
+
+    let elements = document.getElementById('word')
+    console.log("sendSample", elements.value)
+ 
 }
 
 
@@ -28,10 +31,9 @@ function sendSample() {
                     <h1>Word Sample</h1>
                 </div>
                 <p>Type (or paste) the word sample that you would like to generate sci-fi names from</p>
-            <form id="wordform" action="post">
-                <textarea placeholder={sample} id="w" name="words"></textarea>
-                <br />
-                <button type="submit" onClick={sendSample()} name="genwords">Names</button>
+            <form id="form">
+                <textarea placeholder={sample} id="word" name="words">fdasf</textarea>
+                <button type="submit" onClick={sendSample()} name="genwords" id="genword">Names</button>
             </form>
         </div>
     )
