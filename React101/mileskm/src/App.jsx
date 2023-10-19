@@ -4,9 +4,12 @@ import { useState } from 'react'
 function Main () {
 
   let [miles, setMiles] = useState(0)
-  // let [kms, setKms] = useState(0)
+  let [kms, setKms] = useState(0)
 
-  // setKms(kms=miles*1.62)
+  function handleClick() {
+    setKms(kms=miles*1.62)
+  }
+
 
   return (
     <div className="main">
@@ -26,13 +29,13 @@ function Main () {
         <table>
           <tr>
             <td>Is converted to</td>
-            <td>0</td>
+            <td>{kms}</td>
             <td>KMs</td>
           </tr>
         </table>
       </div>
       <div className="calcbutton">
-        <button>Calculate</button>
+        <button onClick={handleClick}>Calculate </button>
       </div>
 
 

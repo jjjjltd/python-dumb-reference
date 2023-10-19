@@ -33,7 +33,7 @@ def genwords():
     except KeyError:
         pass 
     
-    return "Got it"
+    return "Random list of words"
     # return json.dumps({'sample': request.form['sample']})
 
 
