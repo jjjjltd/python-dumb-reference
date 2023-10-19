@@ -27,9 +27,13 @@ def sample():
 @app.route('/genwords', methods=['POST'])
 def genwords():
     print("form data, ", request.data)
-    data = request.get_data
-    print(request.data)
-    return request.get_data()
+    dic = json.loads(request.data)
+    try: 
+        print("form data, ", dic['words'])
+    except KeyError:
+        pass 
+    
+    return "Got it"
     # return json.dumps({'sample': request.form['sample']})
 
 

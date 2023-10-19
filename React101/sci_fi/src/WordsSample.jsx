@@ -16,10 +16,21 @@ const loadSample = async () => {
 }
 
 
-function sendSample() {
+function sendSample(props) {
 
+    console.log("Hit send sample")
     let elements = document.getElementById('word')
-    console.log("sendSample", elements.value)
+    console.log("sendSample", props.words)
+
+    let words = {"words": elements.value}
+
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = "*";
+    // const {data} = await axios.post('/genwords', words, {
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   })
+
  
 }
 
@@ -32,8 +43,9 @@ function sendSample() {
                 </div>
                 <p>Type (or paste) the word sample that you would like to generate sci-fi names from</p>
             <form id="form">
-                <textarea placeholder={sample} id="word" name="words">fdasf</textarea>
-                <button type="submit" onClick={sendSample()} name="genwords" id="genword">Names</button>
+                <textarea placeholder={sample} id="word" name="words" required></textarea>
+                <br />
+                <button type="submit" onClick={sendSample} name="genwords" id="genword">Names</button>
             </form>
         </div>
     )
