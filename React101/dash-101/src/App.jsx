@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import Testjsx from './testimport';
-import MyButton3 from './sharedcounter'
+
 
 const user = {
   name: 'Hedy Lamarr',
@@ -229,9 +229,21 @@ function MyButton2() {
     )
   }
 
-  
+  function MyButton3( {num, onClick} ) {
+
+    return (
+      <div>
+        <button onClick={onClick}>Button {num}</button>
+      </div>
+    )
+
+}
+   
   export default function MyApp() {
+    const [num, setNum] = useState(0)
+    
     const handleClick3 = (num) => {
+      setNum(num + 1)
       alert('handleClick3 in App.jsx ' + num)
     }
   
@@ -245,8 +257,8 @@ function MyButton2() {
         <MyButton2 />
         <MyButton2 />
         <h2>MyButton3 WIP!!</h2>
-        <MyButton3 makeClick={handleClick3} />
-        <MyButton3 makeClick={handleClick3}/>
+        <MyButton3 num = {num} onClick={handleClick3} />
+        <MyButton3 num = {num} onClick={handleClick3}/>
         <h2>End of MyButton3 WIP!!</h2>
         <AboutPage />
         <ParseList />
@@ -258,4 +270,4 @@ function MyButton2() {
     );
   }
   
-  
+ 

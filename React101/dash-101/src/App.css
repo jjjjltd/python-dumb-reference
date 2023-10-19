@@ -33,6 +33,20 @@
   scale: 0.5;
 }
 
+button { 
+  background-color: #4CAF50;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+  }
+
 @media (prefers-reduced-motion: no-preference) {
   .yikes {
     animation: yikes-spin infinite 3s linear;
