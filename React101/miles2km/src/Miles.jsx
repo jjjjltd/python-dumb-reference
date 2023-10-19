@@ -1,14 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 
 export default function Miles () {
 
-    const [miles, setMiles] = useState(0);
+    const [miles, setMiles] = useState(94);
 
     return (
         <div>
-            <input name="miles" type="number" className="milesinput"></input>
+            <h1>Miles to convert {miles}</h1>
+            <input name="miles" 
+            type="number" 
+            className="milesinput"
+            value={miles}
+            onChange={((e) => setMiles(e.target.value))}>
+
+            </input>
             <label  className="miles" value={miles}>Miles</label>
         </div>
     )

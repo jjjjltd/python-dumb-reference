@@ -73,10 +73,13 @@ function MyButton() {
 
   const [count, setCount] = useState(0);
   function handleClick() {
-    setCount(count + 1)
+    setCount(count + 1);
   }
 
+  <h2>See 'const oddeven' in MyButton function for example of Ternary Conditioning.</h2>
+
   const oddeven = (count % 2 === 0) ? <p>Even number entered.</p> : <OddRender /> 
+  
   return (
       <div>
           <h2>This is returned from the MyButton function in App.JS</h2>
@@ -181,7 +184,7 @@ function MyButton2() {
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-          <input type="submit" />
+          <button type="submit">Submit</button>
         </form>
       </div>
     )
@@ -191,6 +194,7 @@ function MyButton2() {
     const [inputs, setInputs] = useState({});
   
     const handleChange2 = (event) => {
+      console.log("HandleChange2, if shown", {event})
       const name = event.target.username;
       const value = event.target.value;
       setInputs(values => ({...values, [name]: value}))
@@ -229,22 +233,21 @@ function MyButton2() {
     )
   }
 
-  function MyButton3( {num, onClick} ) {
+function MyButton3( {count, onClick} ) {
 
-    return (
-      <div>
-        <button onClick={onClick}>Button {num}</button>
-      </div>
-    )
+  return (
+    <div>
+      <button onClick={onClick}>Button {count}</button>
+    </div>
+  )
 
 }
    
   export default function MyApp() {
-    const [num, setNum] = useState(0)
+    const [count, setCount] = useState(0)
     
-    const handleClick3 = (num) => {
-      setNum(num + 1)
-      alert('handleClick3 in App.jsx ' + num)
+    function handleClick3() {
+      setCount(count + 1)
     }
   
     return (
@@ -257,8 +260,8 @@ function MyButton2() {
         <MyButton2 />
         <MyButton2 />
         <h2>MyButton3 WIP!!</h2>
-        <MyButton3 num = {num} onClick={handleClick3} />
-        <MyButton3 num = {num} onClick={handleClick3}/>
+        <MyButton3 count = {count} onClick={handleClick3} />
+        <MyButton3 count = {count} onClick={handleClick3}/>
         <h2>End of MyButton3 WIP!!</h2>
         <AboutPage />
         <ParseList />
