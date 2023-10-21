@@ -18,7 +18,7 @@ def control():
             "minwordlen": 3,
             "minvowels": 2,
             "numwords": 10,
-            "db_on": True}
+            "db_on": 1}
 
 @app.get("/sample")
 def sample():

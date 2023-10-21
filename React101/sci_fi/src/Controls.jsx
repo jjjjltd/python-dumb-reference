@@ -3,7 +3,7 @@ import endPoints from './api';
 
 export default function Controls() {
     let [controls, setControls] = useState("");
-    let [db_on, setDb_On] = useState("False");
+
 
     // Render the screen - one TimeRanges.
     useEffect(() => {
@@ -13,8 +13,6 @@ export default function Controls() {
 const loadControl = async () => {
     const data = await endPoints.control();
     setControls(controls=data);
-
-    setDb_On(controls["db_on"] ? db_on = "True": db_on = "False")
 }
 
     return (
@@ -33,7 +31,7 @@ const loadControl = async () => {
                             <td className="ctlh" name="wct">Word count</td>
                             <td><input  className="ctl"type="number" placeholder={controls["numwords"]} name="wc"/></td>
                             <td className="ctlh" name="dbt">DB On</td>
-                            <td><input  className="ctl"type="text" placeholder={db_on} id="db"/></td>
+                            <td><input  className="ctl"type="text" placeholder={controls["db_on"]} name="db"/></td>
                         </tr>
                     </tbody>
 
