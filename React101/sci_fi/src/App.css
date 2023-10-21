@@ -30,32 +30,27 @@
 
 .controls {
   background-color: #7e3428;
-  min-height: 5vh;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  margin-left: 50px;
-  width: 100%
+
 }
 
 .ctlh {
-  column-width: 20px;
   font-size: xx-large;
   text-wrap: break-word;
   text-wrap: True;
-
+  width: 200px;
 }
 
-.ctlheader {
-  font-size: 50px;
+h1 {
+  font-size: 100px;
 }
 
 .ctl {
   column-width: 5px;
   font-size: large;
   color: black;
+  min-height: 50PX;
+  font-size: xx-large;
+  width: 100px;
 }
 
 textarea {
@@ -65,16 +60,20 @@ textarea {
 }
 
 table {
+  background-color: #285a7e;
   table-layout: auto;
-  width: 100%;
+  width: 50%;
+  align-items: center;
+  margin-left: 15%;
 }
 
-th, td {
+td {
   border: 1px solid black;
+
 }
 
 button { 
-background-color: #4CAF50;
+background-color: lightskyblue;
 border: none;
 color: black;
 padding: 15px 32px;

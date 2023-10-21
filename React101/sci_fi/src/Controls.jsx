@@ -20,19 +20,19 @@ const loadControl = async () => {
     return (
         <div className="ctlheader">
                     <h1>Word Controls</h1>
-            <div className="controls">
+            <div>
                 <table>
                     <tbody>                    
                         <tr>
-                            <td className="ctlh">Max length id="mlt"</td>
-                            <td><input className="ctl" type="number" placeholder={controls["maxwordlen"]} id="ml"/></td>
-                            <td className="ctlh">Min length id = "mint"</td>
-                            <td><input className="ctl"type="number" placeholder={controls["minwordlen"]} id="min"/></td>
-                            <td className="ctlh" id="mvt" >Min vowels</td>
-                            <td><input  className="ctl" type="number" placeholder={controls["minvowels"]} id="mv"/></td>
-                            <td className="ctlh" id="wct">Word count</td>
-                            <td><input  className="ctl"type="number" placeholder={controls["numwords"]} id="wc"/></td>
-                            <td className="ctlh" id="dbt">DB On</td>
+                            <td className="ctlh"  name="mlt">Max length</td>
+                            <td><input className="ctl" type="number" placeholder={controls["maxwordlen"]} name="ml"/></td>
+                            <td className="ctlh" name = "mint">Min length</td>
+                            <td><input className="ctl"type="number" placeholder={controls["minwordlen"]} name="min"/></td>
+                            <td className="ctlh" name="mvt" >Min vowels</td>
+                            <td><input  className="ctl" type="number" placeholder={controls["minvowels"]} name="mv"/></td>
+                            <td className="ctlh" name="wct">Word count</td>
+                            <td><input  className="ctl"type="number" placeholder={controls["numwords"]} name="wc"/></td>
+                            <td className="ctlh" name="dbt">DB On</td>
                             <td><input  className="ctl"type="text" placeholder={db_on} id="db"/></td>
                         </tr>
                     </tbody>
