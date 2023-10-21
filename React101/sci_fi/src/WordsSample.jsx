@@ -21,20 +21,20 @@ function sendSample(props) {
     console.log("Hit send sample")
     
     alert("sendSample" + sample)
-    let words = {"words":  sample}
+    let send = {}
+    send['words'] =  sample
 
-    alert(words)
+    alert(send)
 
     
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = "*";
-    const {data} = axios.post('/genwords', words, {
+    axios.post('/genwords', send, {
          headers: {
-           'Content-Type': 'application/json'
+           'Content-Type': 'application/json',
          }
        })
 
- 
-}
+    }
 
 
     return (

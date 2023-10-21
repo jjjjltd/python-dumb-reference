@@ -5,7 +5,7 @@ import logging
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 model = []
 
 @app.get("/")
@@ -26,12 +26,13 @@ def sample():
 
 @app.route('/genwords', methods=['POST'])
 def genwords():
+    dic={}
     print("form data, ", request.data)
-    dic = json.loads(request.data)
+    dic = request.json
     try: 
-        print("form data, ", dic['words'])
+        print(f"print key,  {dic['words']}")
     except KeyError:
-        pass 
+        print("Unable to unpick dictionary")
     
     return "Random list of words"
     # return json.dumps({'sample': request.form['sample']})
