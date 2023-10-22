@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import endPoints from './api';
 import axios from 'axios';
 
-export default function WordSample() {
+export default function WordSample( ) {
 
     let [sample, setWordSample] =  useState("")
 
@@ -16,16 +16,13 @@ const loadSample = async () => {
 }
 
 
-function sendSample(props) {
+function sendSample( ) {
 
     console.log("Hit send sample")
-    
-    alert("sendSample" + sample)
     let send = {}
     send['words'] =  sample
 
-    alert(send)
-
+    alert(JSON.stringify(send))
     
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = "*";
     axios.post('/genwords', send, {
