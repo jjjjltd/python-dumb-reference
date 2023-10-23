@@ -2,6 +2,7 @@ from flask import Flask, json, request
 from flask_cors import CORS
 from sf_words import WORDS_SAMPLE
 import logging
+import sf_names2 as sf
 
 
 app = Flask(__name__)
@@ -33,6 +34,9 @@ def genwords():
         print(f"print key,  {dic['words']}")
     except KeyError:
         print("Unable to unpick dictionary")
+
+    sf.Our_Words.words_sample = dic['words']
+    sf.proc_words
     
     return "Random list of words"
     # return json.dumps({'sample': request.form['sample']})

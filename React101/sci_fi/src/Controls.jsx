@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import endPoints from './api';
 
-export default function Controls( ) {
+export default function Controls( newcontrols ) {
     let [controls, setControls] = useState("");
     let [maxwordlen, setMaxwordlen] = useState(1)
     let [minwordlen, setMinwordlen] = useState(1)
     let [minvowels, setMinvowels] = useState(1)
     let [numwords, setNumwords] = useState(1)
     let [db_on, setDb_on] = useState(1)
+
+    
 
 
     // Render the screen - one TimeRanges.
@@ -23,7 +25,7 @@ const loadControl = async () => {
     return (
         <div className="ctlheader">
                     <h1>Word Controls</h1>
-                    <p>Value of maxwordlen {controls["maxwordlen"]}</p>
+                    <p>Value of maxwordlen {maxwordlen}</p>
             <div>
                 <table>
                     <tbody>                    

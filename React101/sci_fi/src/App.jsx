@@ -1,12 +1,14 @@
 import './App.css';
-import Controls from './Controls'
+import ControlS from './Controls'
 import WordSample from './WordsSample'
 
 function App() {
 
+  let newcontrols = {}
+
   return (
     <div className="App">
-      <Controls />
+      <ControlS />
       <WordSample />
     </div>
   );
