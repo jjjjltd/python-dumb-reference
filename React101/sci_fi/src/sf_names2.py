@@ -37,8 +37,7 @@ class Our_Words():
     high_prob_list = []
     med_prob_list = []
     low_prob_list = []
-
-
+    final_words_list = []
 
     max_word_len = 10
     min_word_len = 3
@@ -210,9 +209,8 @@ def build_prob_lists():
     if vowel_count < Our_Words.min_vowels:
         final_word = vowel_adjust(gen_word)
 
-        
-
     print(final_word)
+    Our_Words.final_words_list.append(final_word.title())
 
 
 
@@ -242,6 +240,8 @@ def proc_words():
                 distinct_letters(l)
 
     clip()
+
+    return Our_Words.final_words_list
 
 if __name__ == "__main__":
     get_words()

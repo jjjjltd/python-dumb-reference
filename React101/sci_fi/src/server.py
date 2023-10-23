@@ -36,7 +36,9 @@ def genwords():
         print("Unable to unpick dictionary")
 
     sf.Our_Words.words_sample = dic['words']
-    sf.proc_words
+    final_words = sf.proc_words()
+
+    print(f"final words: {final_words}")
     
     return "Random list of words"
     # return json.dumps({'sample': request.form['sample']})
