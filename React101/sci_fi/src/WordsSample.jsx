@@ -5,6 +5,7 @@ import axios from 'axios';
 export default function WordSample( ) {
 
     let [sample, setWordSample] =  useState("")
+    let [words, setWords] = useState([])
 
     useEffect(() => {
         loadSample()
@@ -21,6 +22,7 @@ function sendSample( ) {
     console.log("Hit send sample")
     let send = {}
     send['words'] =  sample
+    let word_list = []
 
     alert(JSON.stringify(send))
     
@@ -29,10 +31,12 @@ function sendSample( ) {
          headers: {
            'Content-Type': 'application/json',
          }
+       }).then(res => {
+            console.log("Response words:" + JSON.stringify(res.data))
        })
 
     }
-
+    
 
     return (
         <div className="wordsample">
@@ -41,12 +45,12 @@ function sendSample( ) {
                     <h1>Word Sample</h1>
                 </div>
                 <p>Type (or paste) the word sample that you would like to generate sci-fi names from</p>
-            <form id="form">
+            <form id="form" method="POST">
                 <textarea placeholder={sample} id="word" name="words" required
                 onChange={(e)=>setWordSample(sample=e.target.value)}></textarea>
                 <br />
                 <button type="submit" onClick={sendSample} name="genwords" id="genword">Names</button>
-            </form>
+            </form>                  
         </div>
     )
 }
