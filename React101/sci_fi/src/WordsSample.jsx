@@ -22,7 +22,7 @@ function sendSample( ) {
     console.log("Hit send sample")
     let send = {}
     send['words'] =  sample
-    let word_list = []
+    let word_list = ""
 
     alert(JSON.stringify(send))
     
@@ -34,13 +34,13 @@ function sendSample( ) {
        }).then(res => {
             console.log("Response words:" + JSON.stringify(res.data))
             let strwords = JSON.stringify(res.data)
-            let arrwords = strwords.split(",")
-            console.log("Array words:" + typeof(arrwords))
-            arrwords.forEach((word, i)=>console.log(word))
-       })
+            word_list = strwords.split(",")
+            console.log("Array words:" + typeof(word_list))
+            word_list.forEach((word, i)=>console.log(word))
+       }).catch(err=>console.log("Error found:  " + err))
 
     //    return(
-    //     arrwords.forEach((word, i)=><h2>{word}</h2>)
+    //     word_list.forEach((word, i)=><h2>{word}</h2>)
     //    )
 
     }
