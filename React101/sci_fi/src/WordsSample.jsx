@@ -33,7 +33,15 @@ function sendSample( ) {
          }
        }).then(res => {
             console.log("Response words:" + JSON.stringify(res.data))
+            let strwords = JSON.stringify(res.data)
+            let arrwords = strwords.split(",")
+            console.log("Array words:" + typeof(arrwords))
+            arrwords.forEach((word, i)=>console.log(word))
        })
+
+    //    return(
+    //     arrwords.forEach((word, i)=><h2>{word}</h2>)
+    //    )
 
     }
     
