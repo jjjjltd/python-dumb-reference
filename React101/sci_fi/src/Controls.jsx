@@ -25,7 +25,7 @@ const loadControl = async () => {
     return (
         <div className="ctlheader">
                     <h1>Word Controls</h1>
-                    <p>Value of maxwordlen {maxwordlen}</p>
+                    <h2>Value of maxwordlen {maxwordlen}</h2>
             <div>
                 <table>
                     <tbody>                    

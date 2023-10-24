@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import endPoints from './api';
 import axios from 'axios';
 
-export default function WordSample( ) {
+export default function WordSample(props) {
+    console.log("Word list on entry: " + props.word_list)
 
     let [sample, setWordSample] =  useState("")
     let [words, setWords] = useState([])
