@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import endPoints from './api';
 import axios from 'axios';
 
 export default function WordSample(props) {
-    console.log("Word list on entry: " + props.word_list)
 
     let [sample, setWordSample] =  useState("")
-    let [words, setWords] = useState([])
 
     useEffect(() => {
         loadSample()
@@ -18,31 +16,36 @@ const loadSample = async () => {
 }
 
 
-function sendSample( ) {
+function SendSample( props ) {
+    console.log("Props value: " + typeof(props.dowords))
+    console.log("Props value: " + props.dowords)
 
-    console.log("Hit send sample")
     let send = {}
     send['words'] =  sample
-    let word_list = ""
 
-    alert(JSON.stringify(send))
-    
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = "*";
+
     axios.post('/genwords', send, {
          headers: {
            'Content-Type': 'application/json',
          }
        }).then(res => {
-            console.log("Response words:" + JSON.stringify(res.data))
+            // console.log("Response words:" + JSON.stringify(res.data))
             let strwords = JSON.stringify(res.data)
-            word_list = strwords.split(",")
-            console.log("Array words:" + typeof(word_list))
-            word_list.forEach((word, i)=>console.log(word))
+            // strwords = strwords.split(",")
+            props.dowords(strwords)     
+            console.log("In theory we have done the function" + props.word_list)
+
+            // word_list.forEach((word, i)=>console.log(word))
        }).catch(err=>console.log("Error found:  " + err))
 
-    //    return(
-    //     word_list.forEach((word, i)=><h2>{word}</h2>)
-    //    )
+
+       return(
+        <>
+        <h2>Literal</h2>
+
+        </>
+       )
 
     }
     
@@ -58,7 +61,7 @@ function sendSample( ) {
                 <textarea placeholder={sample} id="word" name="words" required
                 onChange={(e)=>setWordSample(sample=e.target.value)}></textarea>
                 <br />
-                <button type="submit" onClick={sendSample} name="genwords" id="genword">Names</button>
+                <button type="submit" onClick={()=>SendSample(props)} name="genwords" id="genword">Names</button>
             </form>                  
         </div>
     )

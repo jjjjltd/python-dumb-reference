@@ -15,11 +15,11 @@ def root():
 
 @app.get("/control")
 def control():
-    return {"maxwordlen": 10,
+    return {"maxwordlen": 15,
             "minwordlen": 3,
             "minvowels": 2,
             "numwords": 10,
-            "db_on": 1}
+            "db_on": 0}
 
 @app.get("/sample")
 def sample():
