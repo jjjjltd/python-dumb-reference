@@ -210,6 +210,9 @@ def build_prob_lists():
         final_word = vowel_adjust(gen_word)
 
     print(final_word)
+    if len(Our_Words.final_words_list) > 10:
+        Our_Words.final_words_list = []
+        
     Our_Words.final_words_list.append(final_word.title())
 
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useEffect, useState} from 'react';
 import endPoints from './api';
 import axios from 'axios';
 
@@ -11,15 +11,13 @@ export default function WordSample(props) {
     }, [])
 
 const loadSample = async () => {
-    const data = await endPoints.sample();
+    let data = []
+    data = await endPoints.sample();
     setWordSample(sample=data)
 }
 
 
 function SendSample( props ) {
-    console.log("Props value: " + typeof(props.dowords))
-    console.log("Props value: " + props.dowords)
-
     let send = {}
     send['words'] =  sample
 
@@ -30,13 +28,7 @@ function SendSample( props ) {
            'Content-Type': 'application/json',
          }
        }).then(res => {
-            // console.log("Response words:" + JSON.stringify(res.data))
-            let strwords = JSON.stringify(res.data)
-            // strwords = strwords.split(",")
-            props.dowords(strwords)     
-            console.log("In theory we have done the function" + props.word_list)
-
-            // word_list.forEach((word, i)=>console.log(word))
+            props.dowords(res.data)     
        }).catch(err=>console.log("Error found:  " + err))
 
 
@@ -61,7 +53,7 @@ function SendSample( props ) {
                 <textarea placeholder={sample} id="word" name="words" required
                 onChange={(e)=>setWordSample(sample=e.target.value)}></textarea>
                 <br />
-                <button type="submit" onClick={()=>SendSample(props)} name="genwords" id="genword">Names</button>
+                <button type="submit" onClick={()=>SendSample(props)} name="genwords" id="genword">Generate Names</button>
             </form>                  
         </div>
     )
