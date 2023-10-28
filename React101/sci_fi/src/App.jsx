@@ -2,6 +2,7 @@ import './App.css';
 import ControlS from './Controls'
 import WordSample from './WordsSample'
 import ListWords from './ListWords';
+import Minipost from './Minipost';
 import {useState, useEffect} from 'react'
 
 function App() {
@@ -22,9 +23,7 @@ function App() {
   
   return (
     <div className="App">
-      <ControlS />
-      <WordSample word_list={word_list} dowords={setWord_List}/>
-      <ListWords word_list={word_list}/>
+      <Minipost dowords={setWord_List}/>
     </div>
   );
 }
