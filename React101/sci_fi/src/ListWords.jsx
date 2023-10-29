@@ -27,7 +27,7 @@ function Word_Extract (word_list) {
     
     return (
         <div className="words">
-            {abc.map((value, i) =>{return (<h1>{value}</h1>)})}
+            {abc.map((value, i) =>{return (<h1 key={i}>{value}</h1>)})}
             {Array.prototype.forEach.call(word_list, (value, i) => {return (<h1>{value}</h1>)})}
         </div>
 

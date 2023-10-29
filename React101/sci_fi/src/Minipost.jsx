@@ -3,15 +3,19 @@ import axios from 'axios';
 
 export default function Minipost(props) {
 
-    const [word_list, setWord_List] = useState(["1", "2", 3])
-    let send = "This is a short list of words with most of the vowels."
-
+    const [word_list, setWord_List] = useState(["abc", "def", "ghi", 4])
+    let send =  {}
+    send['words'] = "This is a short list of words with most of the vowels."
+    
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = "*";
+    
     axios.post('/genwords', send, {
         headers: {
         'Content-Type': 'application/json',
         }
     }).then(res => {
-        setWord_List(word_list = res.data)     
+        console.log(res.data)
+        setWord_List(res.data)     
     }).catch(err=>console.log("Error found:  " + err))
 
     console.log(word_list)
@@ -20,6 +24,9 @@ export default function Minipost(props) {
     return (
         <div>
             <h1>Hello</h1>
+                <ol>
+                    {word_list.map((word, i) => {return (<li key={i}>{word}</li>)})}
+                </ol>
         </div>
     )
 
