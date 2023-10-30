@@ -1,7 +1,7 @@
-export default function Backcard () {
+export default function Backcard (props) {
     return (
         <div className="flip-card-back">
-            <p>This is an answer</p>
+            <p>{props.text}</p>
         </div>
     )
 }

@@ -1,7 +1,7 @@
-export default function Frontcard () {
+export default function Frontcard (props) {
     return (
         <div className="flip-card-front">
-            <p>This is a question</p>
+            <p>{props.text}</p>
         </div>
     )
 }
