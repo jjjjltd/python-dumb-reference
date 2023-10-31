@@ -18,6 +18,7 @@ const loadSample = async () => {
 
 
 function SendSample( props ) {
+
     let send = {}
     send['words'] =  sample
 
@@ -28,16 +29,13 @@ function SendSample( props ) {
            'Content-Type': 'application/json',
          }
        }).then(res => {
-            props.dowords(res.data)     
+            props.dowords(res.data)
+            console.log("Res data: " + props.word_list)     
        }).catch(err=>console.log("Error found:  " + err))
 
+       console.log("Props.word_list" + props.word_list)
 
-       return(
-        <>
-        <h2>Literal</h2>
-
-        </>
-       )
+   
 
     }
     
@@ -54,7 +52,9 @@ function SendSample( props ) {
                 onChange={(e)=>setWordSample(sample=e.target.value)}></textarea>
                 <br />
                 <button type="submit" onClick={()=>SendSample(props)} name="genwords" id="genword">Generate Names</button>
-            </form>                  
+            </form>
+            <br />
+            <SendSample />    
         </div>
     )
 }

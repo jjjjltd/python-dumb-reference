@@ -26,7 +26,6 @@ function App() {
       <ControlS />
       <WordSample word_list={word_list} dowords={setWord_List}/>
       <ListWords word_list={word_list}/> 
-      <Minipost dowords={setWord_List}/>
     </div>
   );
 }
