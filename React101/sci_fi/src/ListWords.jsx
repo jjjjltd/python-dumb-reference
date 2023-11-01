@@ -18,17 +18,18 @@ export default function ListWords(props) {
 }
 
 function Word_Extract (word_list) {
-    console.log(word_list)
-    const abc = ["alpha", "beta", "charlie", "delta", "echo"]
+    
+    console.log("Word list: " + Object.values(word_list) + " " + typeof(word_list))
+    
+    let abc = ["alpha", "beta", "charlie", "delta", "echo"]
 
     abc.forEach((value, i)=>console.log("Random string:  " + value + " " + i))
     Array.prototype.forEach.call(word_list, (value, i) => console.log("Word string:  " + value + " " + i))   
-    console.log(abc)
     
     return (
         <div className="words">
             {abc.map((value, i) =>{return (<h1 key={i}>{value}</h1>)})}
-            {Array.prototype.forEach.call(word_list, (value, i) => {return (<h1>{value}</h1>)})}
+            {Object.values(word_list).map((value, i) => {return (<h1 key={i}>This is some text:  {value}</h1>)})}
         </div>
 
     )

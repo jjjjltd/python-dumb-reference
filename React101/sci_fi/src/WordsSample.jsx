@@ -19,6 +19,8 @@ const loadSample = async () => {
 
 function SendSample( props ) {
 
+    console.log("Props.dowords is:  " + typeof(props.word_list))
+
     let send = {}
     send['words'] =  sample
 
