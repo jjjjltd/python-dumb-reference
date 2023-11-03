@@ -13,6 +13,7 @@ const requests = {
 
 const endPoints = {
     home: () => requests.get("/"),
+    homeq: () => requests.get("/q"),
     qa: () => requests.get("/qa"),
 }
 

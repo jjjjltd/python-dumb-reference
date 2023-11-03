@@ -1,0 +1,15 @@
+qanda = {
+    "abstraction": "the process of removing or hiding unnecessary details",
+    "accumulator": "a purpose register in the cpu which stores results from the alu",
+    "actuator": "converts output commands from a microcontroller into mechanical action",
+    "amplitude": "the distance of a wave from the x axis at any time, percieved as volume",
+    "address bus": "carries address of memory location that cpu will read and write from/to",
+    "ADC": "analogue to digital conversion, such as sampling sounds into data",
+    "arguments": "pieces of data as input into a function",
+    "ALU": "arithmatic logic unit, part of cpu that performs arithmatic logic operations",
+    "ASCII": "a 7 bit binary code to represent text, each character assigned a value between 0,127",
+    "arithmatic shift": "a binary shift left or right. right shift left filled with msb, left shift right filledwith 0s",
+    "audit trail": "output identifying changes to code and who changed it",
+    "baiting": "an attack that exploits greed or curiosity to gain information or run malware",
+    "bandwidth": "mesure of max network capacity",
+}

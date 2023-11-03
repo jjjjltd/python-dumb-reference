@@ -3,9 +3,19 @@ import axios from 'axios';
 
 export default function Minipost(props) {
 
+    return (
+        <div>
+            <button type="submit" onClick={()=>PostAction(props)} name="genwords" id="genword">Generate Names</button>
+        </div>
+    )
+}
+
+function PostAction(props) {
+
     const [word_list, setWord_List] = useState(["abc", "def", "ghi", 4])
     let send =  {}
-    send['words'] = "This is a short list of words with most of the vowels."
+    send['words'] = props.sample
+    console.log("Minipost: " + props.sample)
     
     useEffect (() => {
 
@@ -27,7 +37,6 @@ export default function Minipost(props) {
 
     return (
         <div>
-            <h1>Hello</h1>
                 <ol>
                     {word_list.map((word, i) => {return (<li key={i}>{word}</li>)})}
                 </ol>

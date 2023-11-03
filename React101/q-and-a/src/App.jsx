@@ -19,7 +19,7 @@ function App() {
   }, [])
 
 const loadToptext = async () => {
-  const data = await endPoints.home();
+  const data = await endPoints.homeq();
   console.log(data)
   setToptext(toptext=data);
 }

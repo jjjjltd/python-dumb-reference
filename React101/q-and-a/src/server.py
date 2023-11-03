@@ -1,4 +1,5 @@
 import csv
+from qandadict import qanda
 from flask import Flask
 from flask_cors import CORS
 import random
@@ -15,12 +16,27 @@ def read_csv():
         for row in reader:
 
             dicse[f"{row[0]}"] = row[1]
+
+def read_dict():
+
+    for k, v in qanda.items():
+        dicse[k] = v
+    
+    print(f"read_dict: {dicse}")
+
         
 @app.route("/")
 def home():
     read_csv()
-    return("Welcome to Flash Card Quiz")
-        
+    return("Welcome to (CSV) Flash Card Quiz")
+
+
+@app.route("/q")
+def homeq():
+    print("homeq hit" )
+    read_dict()
+    return("Welcome to (Dictionary) Flash Card Quiz")
+
 @app.get("/qa")
 def qa():
     qlist = []

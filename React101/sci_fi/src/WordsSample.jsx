@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import endPoints from './api';
 import axios from 'axios';
+import Minipost from './Minipost';
 
 export default function WordSample(props) {
 
@@ -53,10 +54,10 @@ function SendSample( props ) {
                 <textarea placeholder={sample} id="word" name="words" required
                 onChange={(e)=>setWordSample(sample=e.target.value)}></textarea>
                 <br />
-                <button type="submit" onClick={()=>SendSample(props)} name="genwords" id="genword">Generate Names</button>
+                
             </form>
             <br />
-            <SendSample />    
+            <Minipost sample={sample} /> 
         </div>
     )
 }
