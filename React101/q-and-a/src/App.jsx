@@ -38,10 +38,11 @@ const loadQuestiontext = async () => {
     <h1>{toptext}</h1>
       <div className="flip-card">
         <div className="flip-card-inner">
-      <Frontcard text={fronttext}/>
-      <Backcard text={backtext}/>
+          <Frontcard text={fronttext}/>
+          <Backcard text={backtext}/>
         </div>
       </div>
+      <button type="button" onClick={loadQuestiontext}>Next</button>
     </div>
 
   );
