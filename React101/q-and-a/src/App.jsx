@@ -11,7 +11,7 @@ function App() {
   let [toptext, setToptext] = useState("")
   let [fronttext, setFronttext] = useState("")
   let [backtext, setBacktext] = useState("")
-
+  let [select, setSelect] = useState("dict")
 
   useEffect(() => {
     loadToptext()
@@ -19,33 +19,58 @@ function App() {
   }, [])
 
 const loadToptext = async () => {
-  const data = await endPoints.homeq();
+  const data = await endPoints.home();
   console.log(data)
   setToptext(toptext=data);
 }
 
 const loadQuestiontext = async () => {
-  const data = await endPoints.qa();
-  console.log(data)
+  let data = ""
+  console.log({select}['select'])
+  if ({select}['select'] == "dict") {
+    data = await endPoints.dict();
+  } else {
+    data = await endPoints.csv();
+  }
   setFronttext(fronttext=data["front"]);
   setBacktext(backtext=data["back"]);
   
 }
 
+function Sel (props) {
+  // API End Points, actions in server.py:
+  // dict:  read from .py in dictionary format.
+  // csv:  read from a csv file
+
+  
+
+  return (
+    <div>
+      <select name="source" id="source" value={select} className="select" onChange={(e=>props.setSelect(e.target.value))}>
+        <option value="csv">CSV (Spanish)</option>
+        <option value="dict">Dictionary</option>
+        <option value="computing">Computer Science</option>
+      </select>
+    </div>
+  )
+
+}
 
   return (
     <div className="App">
-    <h1>{toptext}</h1>
+      <h1>Welcome to {select} Flashcard Quiz </h1>
+      <Sel setSelect={setSelect}/>
+      <button type="button" onClick={loadQuestiontext}>Next</button>
       <div className="flip-card">
         <div className="flip-card-inner">
           <Frontcard text={fronttext}/>
           <Backcard text={backtext}/>
         </div>
       </div>
-      <button type="button" onClick={loadQuestiontext}>Next</button>
     </div>
 
   );
 }
 
 export default App;
+

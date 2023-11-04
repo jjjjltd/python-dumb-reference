@@ -11,5 +11,5 @@ qanda = {
     "arithmatic shift": "a binary shift left or right. right shift left filled with msb, left shift right filledwith 0s",
     "audit trail": "output identifying changes to code and who changed it",
     "baiting": "an attack that exploits greed or curiosity to gain information or run malware",
-    "bandwidth": "mesure of max network capacity",
+    "bandwidth": "mesure of max network capacity",        
 }

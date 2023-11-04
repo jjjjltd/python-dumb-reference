@@ -13,8 +13,8 @@ const requests = {
 
 const endPoints = {
     home: () => requests.get("/"),
-    homeq: () => requests.get("/q"),
-    qa: () => requests.get("/qa"),
+    dict: () => requests.get("/dict"),
+    csv: () => requests.get("/csv"),
 }
 
 export default endPoints

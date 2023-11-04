@@ -10,35 +10,41 @@ app = Flask(__name__)
 CORS(app)
 
 def read_csv():
-
+    dicse.clear()
     with open ("./Spanish English.csv", "r") as csvfile:
         reader = csv.reader(csvfile, delimiter=",")
         for row in reader:
-
             dicse[f"{row[0]}"] = row[1]
 
 def read_dict():
-
+    dicse.clear()
     for k, v in qanda.items():
         dicse[k] = v
-    
-    print(f"read_dict: {dicse}")
 
         
 @app.route("/")
 def home():
     read_csv()
-    return("Welcome to (CSV) Flash Card Quiz")
+    return("Welcome to (TBA) Flash Card Quiz")
 
 
-@app.route("/q")
-def homeq():
+@app.get("/dict")
+def rdict():
+    print("dict hit")
     print("homeq hit" )
     read_dict()
-    return("Welcome to (Dictionary) Flash Card Quiz")
+    
+    return pop_dict()
 
-@app.get("/qa")
-def qa():
+@app.get("/csv")
+def rcsv():
+    print("csv hit")
+    read_csv()
+
+    return pop_dict()
+
+def pop_dict():
+
     qlist = []
     retdict = {}
     idx = 0
@@ -53,7 +59,6 @@ def qa():
     retdict["front"] =  question
     retdict["back"] = answer
 
-    print(retdict)
     return retdict
 
 
