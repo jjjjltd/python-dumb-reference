@@ -6,6 +6,17 @@ import React, {useEffect, useState} from 'react'
 
 import './App.css';
 
+function Buttons() {
+  return (
+    <div>
+      <button className="Ease" id="easy">Easy</button>
+      <button className="Ease" id="medium">Medium</button>
+      <button className="Ease" id="hard">Hard</button>
+    </div>
+  )
+
+}
+
 function App() {
 
   let [toptext, setToptext] = useState("")
@@ -61,6 +72,7 @@ function Sel (props) {
       <h1>Welcome to {select} Flashcard Quiz </h1>
       <Sel setSelect={setSelect}/>
       <button type="button" onClick={loadQuestiontext}>Next</button>
+      <Buttons />
       <div className="flip-card">
         <div className="flip-card-inner">
           <Frontcard text={fronttext}/>
